@@ -35,7 +35,9 @@ Observer.prototype.define = function(key,value,data){
         get:function(key){
             if(Sub.flag){
                 gl.add(Sub.flag);
+                console.log(gl.subs);
             }
+
             return value;
         },
         set:function(newVal){
@@ -45,6 +47,8 @@ Observer.prototype.define = function(key,value,data){
             //因为在set中继续调用set赋值，引起递归调用
             value = newVal;
             observer(newVal);
+            console.log('2');
+            console.log(gl.subs);
             gl.notify(newVal);
         }
 
@@ -66,7 +70,8 @@ Sub.prototype.notify = function(newVal){
 Sub.prototype.add = function(flag){
     var uid = flag.uid;
     if (!this.subs[uid]){
-        this.subs[uid] =flag ;
+        this.subs[uid] =flag;
+        //console.log(this.subs)
     }
 };
 Sub.flag = null;
