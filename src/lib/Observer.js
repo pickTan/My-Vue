@@ -23,7 +23,7 @@ function Observer(data){
 
 
 Observer.prototype.observer = function(data){
-    for(key in data){
+    for(var key in data){
          this.define(key,data[key],data)
     }
 };
@@ -55,7 +55,6 @@ Observer.prototype.define = function(key,value,data){
 function Sub(){
     this.subs = {};
 }
-Sub.flag = null;
 
 Sub.prototype.notify = function(newVal){
     for(var uid in this.subs){
@@ -70,3 +69,4 @@ Sub.prototype.add = function(flag){
         this.subs[uid] =flag ;
     }
 };
+Sub.flag = null;

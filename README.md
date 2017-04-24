@@ -132,7 +132,14 @@ Observer.prototype.define = function(key,value,data){
    observer(value);
 };
 ```
+## Compiler 设计思路
+Compiler 主要是代码的编译，设计角度分为
+1. 关键字替换
+2. 当页面为text格式的编译，直接替代 以及123{{12}}123{{12}}这种文档与模版并存
+3. 当页面为node格式的编译，获取attr中v-bind,v-on，v-model的不同编译
+4. 增加watcher监听
+
 ## Watcher 设计思路
-watcher 根据全局变量sub
-### 
+watcher 根据全局变量sub 当更新时执行watcher的update动作来compiler
+
  
