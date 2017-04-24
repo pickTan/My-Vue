@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MyVue</title>
+</head>
+<body>
+<script src="src/lib/Observer.js"></script>
+<script src="src/lib/Watcher.js"></script>
+<script src="src/lib/Compiler.js"></script>
+<script src="src/MyVue.js"></script>
+<div id="msg">
+    {{b.c+b.c}}这是普通文本{{b.c+1+message}}这是普通文本
+    <p>{{message}}</p>
+
+    <p><input type="text" v-model="message"/></p>
+    <p>{{message}}</p>
+    <p><button type="button" v-on:click="clickBtn(message)">click me</button></p>
+</div>
+<script>
+    new MyVue({
+        el:"msg",
+        data:{
+            b:{
+                c:1
+            },
+            message:"hello world!"
+        },
+        methods:{
+            clickBtn:function(message){
+                this.message = "clicked";
+            }
+        }
+    });
+</script>
+</body>
+</html>

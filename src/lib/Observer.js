@@ -24,14 +24,13 @@ function Observer(data){
 
 Observer.prototype.observer = function(data){
     for(key in data){
-         this.ob(key,data[key],data)
+         this.define(key,data[key],data)
     }
 };
 Observer.prototype.define = function(key,value,data){
     var sub  = new Sub();
-    Object.defineProperty(key,value,{
-        configurable:true,
-        writable:true,
+    Object.defineProperty(data,key,{
+        configurable:false,
         enumerable:true,
         get:function(key){
             if(sub.flag){

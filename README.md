@@ -75,7 +75,12 @@ Observer.property.define(key,value,data){
 此处我设计的是sub的全局变量.
 
 ### Sub全局变量 的设计思路
-
+首先，我们拦截了getter；
+我们要为a.d添加Wacher监听者tmpWatcher；
+将一个全局变量赋值target=tmpWatcher；
+取值a.d，也就调用到了a.d的getter；
+在a.d的getter中，将target添加到监听队列中；
+flag = null;
 1. sub 须具有一个data 与 fun执行编译之间的对应关系,即sub。 用uid来做唯一标示
 
 ```
@@ -128,4 +133,6 @@ Observer.prototype.define = function(key,value,data){
 };
 ```
 ## Watcher 设计思路
+watcher 根据全局变量sub
+### 
  
