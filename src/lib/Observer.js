@@ -28,21 +28,24 @@ Observer.prototype.observer = function(data){
     }
 };
 Observer.prototype.define = function(key,value,data){
-    var sub  = new Sub();
+    var gl  = new Sub();
     Object.defineProperty(data,key,{
         configurable:false,
         enumerable:true,
         get:function(key){
-            if(sub.flag){
-                sub.add(sub.flag);
+            if(Sub.flag){
+                gl.add(Sub.flag);
             }
             return value;
         },
         set:function(newVal){
             if(value == newVal) return;
+            //利用闭包的特性,修改value,get取值时也会变化
+            //不能使用data[key]=newVal
+            //因为在set中继续调用set赋值，引起递归调用
             value = newVal;
             observer(newVal);
-            sub.notify(newVal);
+            gl.notify(newVal);
         }
 
     })
@@ -56,12 +59,14 @@ Sub.flag = null;
 
 Sub.prototype.notify = function(newVal){
     for(var uid in this.subs){
+        console.log(this.subs);
         this.subs[uid].update(newVal);
     }
 };
 
 Sub.prototype.add = function(flag){
-    if (this.subs[Flag.uid]){
-        this.subs[uId] =flag ;
+    var uid = flag.uid;
+    if (!this.subs[uid]){
+        this.subs[uid] =flag ;
     }
 };
